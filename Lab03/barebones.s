@@ -11,7 +11,7 @@ _barebones:
 
 main:
 				# (1) What are we setting up here?
-				# Ans:
+				# Ans: 
 	pushq %rbp		#
 	movq  %rsp, %rbp	#
 

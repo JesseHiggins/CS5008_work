@@ -1,5 +1,5 @@
-// Your Name Here
-// Date Here
+// Jesse Higgins
+// 10/6/2026
 // Homework Assignment 3
 //
 // Compile this assignment with: gcc -g -Wall main.c -o main
