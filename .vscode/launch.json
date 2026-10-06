@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug estimator",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Lab03/estimator",
+            "args": ["${input:assemblyFile}"],
+            "cwd": "${workspaceFolder}/Lab03",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "C/C++: gcc build active file"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "assemblyFile",
+            "type": "promptString",
+            "description": "Path to the assembly input file",
+            "default": "input.s"
+        }
+    ]
+}
