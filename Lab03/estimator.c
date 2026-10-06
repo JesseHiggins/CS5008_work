@@ -7,45 +7,48 @@
 #include <stdio.h>
 #include <string.h>
 
-
-
 int main(int argc, char** argv) {
 
-    const char *instruc[11] = {"ADD", "SUB", "MUL", "IMU", "DIV", "IDI", "MOV", "LEA", "PUSH", "POP", "RET"};
+    const char *instruc[11] = {"add\0", "sub\0", "mul\0", "imu\0", "div\0", "idi\0", "mov\0", "lea\0", "pus\0", "pop\0", "ret\0"};
     char cycles[11] = {1, 1, 3, 3, 24, 24, 1, 3, 1, 1, 1};
     char count[11] = {0};
+    int instrucsum;
+    int cyclesum;
 
     FILE* file = fopen(argv[1], "r");
+    //FILE* file = fopen("barebones.s", "r");
 
     char line[256];
-
-    if (file != NULL) {
+    char target[4];
         
-        while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, sizeof(line), file)) {
 
-            char destination[256];
+        if (sscanf(line, "%3s", target) == 1) {
+            
+            //printf("%s\n", target);
 
-            strncpy(destination, line, 4);
-            destination[4] = '\0';
+            for (int i = 0; i<10; i++) {
 
-            for (int i = 0; i<11; i++) {
-                if (strcmp(destination, instruc[i]) == 0) {
-                    count[i] = count[i] + cycles[i];
+                if (strcmp(target, instruc[i]) == 0) {
+                    count[i]++;
+                    instrucsum++;
+                    cyclesum += cycles[i];
                 }
 
             }
 
         }
 
-        fclose(file);
-
-    } else {
-        fprintf(stderr, "File error.\n");
     }
+
+    fclose(file);
 
     for (int i = 0; i<11; i++) {
         printf("%s: %d\n", instruc[i], count[i]);
     }
+
+    printf("Total Instructions = %d\n", instrucsum);
+    printf("Total Cycles = %d\n", cyclesum);
 
     return 0;
 }
